@@ -1,30 +1,25 @@
-name: Deploy PHP Native via Docker
+name: Build & Push Docker Image
 
 on:
   push:
     branches: ["main"]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.7.0
-      with:
-        ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-    - name: Copy Files to Server
-      run: |
-        rsync -avz --delete \
-        -e "ssh -o StrictHostKeyChecking=no" \
-        ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/var/www/myapp/
-
-    - name: Restart Docker Container on Server
-      run: |
-        ssh -o StrictHostKeyChecking=no \
-        ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} \
-        "cd /var/www/myapp && docker-compose down && docker-compose up -d --build"
+      - name: Build and Push Image
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: yourdockerhubusername/myapp:latest
