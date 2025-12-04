@@ -7,7 +7,7 @@
           <!-- <img src="./assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" /> -->
           <!--end::Brand Image -->
           <!--begin::Brand Text-->
-          <span class="brand-text fw-light">STUDENT DATA CENTER</span>
+          <span class="brand-text fw-light">TEST</span>
           <!--end::Brand Text-->
         </a>
         <!--end::Brand Link-->
