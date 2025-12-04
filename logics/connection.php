@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";  
+$servername = "mysql";  
 $username   = "root";       
-$password   = "";           
-$database   = "student_data";
+$password   = "password";           
+$database   = "myapp";
 
 
 $conn = mysqli_connect($servername, $username, $password, $database);
@@ -12,3 +12,4 @@ if (!$conn) {
 }
 
 ?>
+
