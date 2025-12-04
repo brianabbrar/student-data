@@ -1,8 +1,8 @@
 <?php
-$servername = "sql100.infinityfree.com";  
-$username   = "if0_40593565";       
-$password   = "5LctqAZ3gxpY";           
-$database   = "if0_40593565_student";
+$servername = "localhos";  
+$username   = "root";       
+$password   = "";           
+$database   = "db_siswa";
 
 
 $conn = mysqli_connect($servername, $username, $password, $database);
@@ -12,4 +12,5 @@ if (!$conn) {
 }
 
 ?>
+
 
