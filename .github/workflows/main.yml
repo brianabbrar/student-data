@@ -3,11 +3,18 @@ name: Deploy to InfinityFree via FTP
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    types: [closed]   # hanya jalan saat PR ditutup (merged)
 
 jobs:
   ftp-deploy:
     name: 📤 Deploy via FTP
     runs-on: ubuntu-latest
+
+    if: |
+      github.event_name == 'push' ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
 
     steps:
       - name: Checkout Repository
@@ -24,6 +31,6 @@ jobs:
           local-dir: "./"
           exclude: |
             **/.git*
-            **/.github/**"
+            **/.github/**
             **/node_modules/**
             **/vendor/**
